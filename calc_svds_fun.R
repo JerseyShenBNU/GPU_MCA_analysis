@@ -7,7 +7,7 @@ calc_svds_fun<-function(
   n
 ){
   # Notification:
-  # DO follow the configuration guidence before using the function
+  # DO follow the configuration guidance before using the function
   # Do put this function into the same directory with gpu_mca_analysis.R
 
   library(data.table)

@@ -8,7 +8,7 @@ gpu_mca_analysis <- function(
                # especially up to the memory of the graphic 
 ){
   # Notification:
-  # DO follow the configuration guidence before using the function
+  # DO follow the configuration guidance before using the function
 
 
   library(rARPACK)

@@ -1,4 +1,4 @@
-Preferred Website guidence:
+Preferred Website guidance:
 https://www.jianshu.com/p/11ae3cd693a5
 
 #1st_install_gpu_drive
