@@ -1,0 +1,85 @@
+Preferred Website guidence:
+https://www.jianshu.com/p/11ae3cd693a5
+
+#1st_install_gpu_drive
+#environment
+# Ubuntu 20
+# Nvidia
+# Ubuntu API lightdm
+
+# terminal 
+# 1. install GPU driver 
+ubuntu-drivers devices
+
+output
+---------------------------------------------------
+driver   : nvidia-driver-465 - third-party non-free
+driver   : nvidia-driver-418-server - distro non-free
+driver   : nvidia-driver-495 - third-party non-free recommended
+driver   : nvidia-driver-455 - third-party non-free
+driver   : nvidia-driver-470 - third-party non-free
+driver   : nvidia-driver-450 - third-party non-free
+driver   : nvidia-driver-470-server - distro non-free
+driver   : nvidia-driver-450-server - distro non-free
+driver   : nvidia-driver-460-server - distro non-free
+driver   : nvidia-driver-460 - third-party non-free
+driver   : xserver-xorg-video-nouveau - distro free builtin
+---------------------------------------------------
+# according to output 
+# the system recommends the nvidia-driver-495 GPU driver
+# get the driver from NVIDIA
+# full category website: https://download.nvidia.com/XFree86/Linux-x86_64/
+
+su root
+cd /usr/local
+wget https://download.nvidia.com/XFree86/Linux-x86_64/495.46/NVIDIA-Linux-x86_64-495.46.run
+
+# shutdown the visual interface of Ubuntu
+# make sure writting down the logging username of your system before shutting down the visual interface of Ubuntu
+
+sudo service lightdm stop
+
+# after shutting down the visual interface, press Ctrl + Alt+F2 to get into terminal interface
+# log in the system using Username and password
+
+su root
+cd /usr/local
+sudo sh NVIDIA-Linux-x86_64-495.46.run
+reboot
+
+#2. Configure CUDA
+su root
+cd /usr/local
+wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.0.2_450.51.05_linux.run
+sudo sh cuda_11.0.2_450.51.05_linux.run
+
+export PATH=/usr/local/cuda-11.5/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.5/lib64\
+                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+sudo vi ~/.bashrc
+#最后添加
+export PATH=/usr/local/cuda-11.5/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.5/lib64\
+                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}
+
+# 3 install gputools
+su root
+cd /usr/local
+wget http://cran.r-project.org/src/contrib/gputools_0.28.tar.gz
+tar -zxvf gputools_0.28.tar.gz
+
+# 3.1 revise the Makefile
+vi gputools/src/Makefile
+NVCC := $(CUDA_HOME)/bin/nvcc -gencode arch=compute_60,code=sm_60
+
+# 3.2 revise the config.mk
+vi gputools/src/config.mk 
+R_INC := /usr/share/R/include
+
+# rezip the package and install the package in Rstudio using gz file
+tar -zcvf gputools.tar.gz gputools
+
+
+
+

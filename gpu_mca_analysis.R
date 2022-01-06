@@ -7,6 +7,10 @@ gpu_mca_analysis <- function(
   step = 20000 # computation step up to computation capability of computer GPU
                # especially up to the memory of the graphic 
 ){
+  # Notification:
+  # DO follow the configuration guidence before using the function
+
+
   library(rARPACK)
   library(bigstatsr)
   library(data.table)

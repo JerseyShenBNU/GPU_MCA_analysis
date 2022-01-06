@@ -6,6 +6,10 @@ calc_svds_fun<-function(
   loc_rf,
   n
 ){
+  # Notification:
+  # DO follow the configuration guidence before using the function
+  # Do put this function into the same directory with gpu_mca_analysis.R
+
   library(data.table)
   library(bigstatsr)
   library(rARPACK)
